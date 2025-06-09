@@ -2,7 +2,6 @@ from enum import Enum
 
 from fastapi import FastAPI, Request
 from fastapi.responses import HTMLResponse
-from fastapi.routing import APIRouter
 
 class ProjectName(str, Enum):
     cameras = "cameras"
@@ -15,6 +14,7 @@ app = FastAPI()
 @app.get("/project", response_class=HTMLResponse)
 async def items_index(request: Request):
     beambreak_url = request.url_for("get_project", project_name="beambreak")
+    print(beambreak_url)
     cameras_url = request.url_for("get_project", project_name="cameras")
     decibel_url = request.url_for("get_project", project_name="decibel")
     return f"""
